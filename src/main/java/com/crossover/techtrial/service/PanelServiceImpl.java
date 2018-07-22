@@ -5,6 +5,8 @@ import com.crossover.techtrial.repository.PanelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 
 /**
  * PanelServiceImpl for panel related handling.

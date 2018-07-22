@@ -6,7 +6,10 @@ import com.crossover.techtrial.model.Panel;
 import com.crossover.techtrial.service.HourlyElectricityService;
 import com.crossover.techtrial.service.PanelService;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -85,11 +88,8 @@ public class PanelController {
   @GetMapping(path = "/api/panels/{panel-serial}/daily")
   public ResponseEntity<List<DailyElectricity>> allDailyElectricityFromYesterday(
       @PathVariable(value = "panel-serial") String panelSerial) {
-    List<DailyElectricity> dailyElectricityForPanel = new ArrayList<>();
-    /**
-     * IMPLEMENT THE LOGIC HERE and FEEL FREE TO MODIFY OR ADD CODE TO RELATED CLASSES.
-     * MAKE SURE NOT TO CHANGE THE SIGNATURE OF ANY END POINT. NO PAGINATION IS NEEDED HERE.
-     */
-    return ResponseEntity.ok(dailyElectricityForPanel);
+	    Panel panel = panelService.findBySerial(panelSerial);
+	    List<DailyElectricity> dailyElectricityForPanel = hourlyElectricityService.getDailyElectricityByPanelId(panel.getId());
+	    return ResponseEntity.ok(dailyElectricityForPanel);
   }
 }

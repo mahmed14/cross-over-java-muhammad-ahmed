@@ -1,6 +1,8 @@
 package com.crossover.techtrial.model;
 
+
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,11 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
 import org.springframework.lang.Nullable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Panel class hold information related to a Solar panel.
- * 
+ *
  * @author Crossover
  *
  */
@@ -23,6 +28,7 @@ public class Panel implements Serializable {
   private static final long serialVersionUID = -8527695980909864257L;
 
   @Id
+  @JsonIgnore
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   Long id;
 
@@ -30,9 +36,11 @@ public class Panel implements Serializable {
   @Column(name = "serial")
   String serial;
 
+  @NotNull
   @Column(name = "longitude")
   Double longitude;
 
+  @NotNull
   @Column(name = "latitude")
   Double latitude;
 
@@ -40,12 +48,23 @@ public class Panel implements Serializable {
   @Column(name = "brand")
   String brand;
 
-  public Long getId() {
-    return id;
+  protected Panel() {
+    this(null, null, null, null);
   }
 
-  public void setId(Long id) {
-    this.id = id;
+  private Panel(@NotNull String serial, @NotNull Double longitude, @NotNull Double latitude, String brand) {
+    this.serial = serial;
+    this.longitude = longitude;
+    this.latitude = latitude;
+    this.brand = brand;
+  }
+
+  public static Panel of(String serial, Double longitude, Double latitude, String brand) {
+    return new Panel(serial, longitude, latitude, brand);
+  }
+
+  public Long getId() {
+    return id;
   }
 
   public String getSerial() {
@@ -81,8 +100,9 @@ public class Panel implements Serializable {
   }
 
   /*
-   * Id, Serial and Brand are only fields required to uniquely identify a Panel
-   * 
+   * Id, Serial and Brand are only fields required to uniquely identify a
+   * Panel
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -96,8 +116,9 @@ public class Panel implements Serializable {
   }
 
   /*
-   * Id, Serial and Brand are only fields required to uniquely identify a Panel
-   * 
+   * Id, Serial and Brand are only fields required to uniquely identify a
+   * Panel
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -136,12 +157,14 @@ public class Panel implements Serializable {
     return true;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   *
    * @see java.lang.Object#toString()
    */
   @Override
   public String toString() {
-    return "Panel [id=" + id + ", serial=" + serial + ", longitude=" + longitude + ", latitude="
-        + latitude + ", brand=" + brand + "]";
+    return "Panel [id=" + id + ", serial=" + serial + ", longitude=" + longitude + ", latitude=" + latitude
+            + ", brand=" + brand + "]";
   }
 }

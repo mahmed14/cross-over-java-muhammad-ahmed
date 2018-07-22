@@ -3,6 +3,8 @@ package com.crossover.techtrial.repository;
 import com.crossover.techtrial.model.Panel;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.stereotype.Repository;
+
 /**
  * PanelRepository allows all operations to Panel Entity.
  * @author Crossover

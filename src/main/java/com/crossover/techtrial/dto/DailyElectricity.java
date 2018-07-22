@@ -1,72 +1,66 @@
 package com.crossover.techtrial.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
- * DailyElectricity class will hold sum, average,minimum and maximum electricity for a given day.
+ * DailyElectricity class will hold sum, average,minimum and maximum electricity
+ * for a given day.
+ * 
  * @author Crossover
  *
  */
 
 public class DailyElectricity implements Serializable {
-  
-  private static final long serialVersionUID = 3605549122072628877L;
 
-  private LocalDate date;
-  
-  private Long sum;
-  
-  private Double average;
-  
-  private Long min;
-  
-  private Long max;
+	private static final long serialVersionUID = 3605549122072628877L;
 
-  public LocalDate getDate() {
-    return date;
-  }
+	private Date date;
 
-  public void setDate(LocalDate date) {
-    this.date = date;
-  }
+	private Long sum;
 
-  public Long getSum() {
-    return sum;
-  }
+	private Long average;
 
-  public void setSum(Long sum) {
-    this.sum = sum;
-  }
+	private Long min;
 
-  public Double getAverage() {
-    return average;
-  }
+	private Long max;
 
-  public void setAverage(Double average) {
-    this.average = average;
-  }
+	public DailyElectricity() {
 
-  public Long getMin() {
-    return min;
-  }
+	}
 
-  public void setMin(Long min) {
-    this.min = min;
-  }
+	public DailyElectricity(Date date, Long sum, Long average, Long min, Long max) {
+		this.date = date;
+		this.sum = sum;
+		this.average = average;
+		this.min = min;
+		this.max = max;
+	}
 
-  public Long getMax() {
-    return max;
-  }
+	public Date getDate() {
+		return date;
+	}
 
-  public void setMax(Long max) {
-    this.max = max;
-  }
+	public Long getSum() {
+		return sum;
+	}
 
-  @Override
-  public String toString() {
-    return "DailyElectricity [date=" + date + ", sum=" + sum + ", average="
-        + average + ", min=" + min + ", max=" + max + "]";
-  }
+	public Long getAverage() {
+		return average;
+	}
+
+	public Long getMin() {
+		return min;
+	}
+
+	public Long getMax() {
+		return max;
+	}
+
+	@Override
+	public String toString() {
+		return "DailyElectricity [date=" + date + ", sum=" + sum + ", average=" + average + ", min=" + min + ", max="
+				+ max + "]";
+	}
 
 }

@@ -1,7 +1,11 @@
 package com.crossover.techtrial.service;
 
+import com.crossover.techtrial.dto.DailyElectricity;
 import com.crossover.techtrial.model.HourlyElectricity;
 import com.crossover.techtrial.repository.HourlyElectricityRepository;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,5 +31,19 @@ public class HourlyElectricityServiceImpl implements HourlyElectricityService {
   public Page<HourlyElectricity> getAllHourlyElectricityByPanelId(Long panelId, Pageable pageable) {
     return hourlyElectricityRepository.findAllByPanelIdOrderByReadingAtDesc(panelId, pageable);
   }
+  
+ public List<HourlyElectricity> getAllHourlyElectricityByPanelUntilYesterday(Long panelId){
+	  
+	  LocalDateTime now = LocalDateTime.now();
+	  LocalDateTime yesterday = now.minusDays(1);
+	  
+	  
+	  return hourlyElectricityRepository.findByPanelIdAndReadingAtLessThanOrderByReadingAtAsc(panelId, yesterday);
+  }
+
+@Override
+public List<DailyElectricity> getDailyElectricityByPanelId(Long panelId) {
+	return hourlyElectricityRepository.getDailyElectricity(panelId);
+}
   
 }
